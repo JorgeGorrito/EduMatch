@@ -9,16 +9,20 @@ public class EduMatch {
     
     public static void main(String[] args) throws SQLException {
          // Crear una instancia de iManejoPersonaSQL
-        IManejoBDPersona manejadorPersona = new ManejoPersonaSQL();
+        IManejoBDPersona manejadorPersona;// = (IManejoBDPersona) new ManejoPersonaSQL();
+        IManejoBDPersonaGuardar manejadorPersonaGuardar;
+        IManejoBDPersonaCargar manejadorPersonaCargar;
         manejadorPersona = new ManejoPersonaCSV();
-
+        manejadorPersonaGuardar = manejadorPersona;
+        manejadorPersonaCargar = manejadorPersona;
+        
         // Ejemplo de guardar una persona
         PersonaDTO persona1 = new PersonaDTO("123456", "Juan", "Pérez", "juan@example.com");
-        manejadorPersona.guardar(persona1);
-
+        manejadorPersonaGuardar.guardar(persona1);
+        
         // Ejemplo de cargar una persona por cédula
         String cedulaABuscar = "123456";
-        PersonaDTO personaCargada = manejadorPersona.cargar(cedulaABuscar);
+        PersonaDTO personaCargada = manejadorPersonaCargar.cargar(cedulaABuscar);
 
         if (personaCargada != null) {
             System.out.println("Persona cargada:");
