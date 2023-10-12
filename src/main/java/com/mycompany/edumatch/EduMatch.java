@@ -42,5 +42,12 @@ public class EduMatch {
             System.out.println("------------------------");
         }
 
+        DocenteDTO docente1 = new DocenteDTO("123456", "Juan", "Pérez", "juan@example.com");
+        Persona persona2 = new Persona(docente1);
+        persona2.mostrarPersona();
+
+        EstudianteDTO estudiante1 = new EstudianteDTO("123456", "Juan", "Pérez", "juan@example.com");
+        Persona persona3 = new Persona(estudiante1);
+        persona3.mostrarPersona();
     }
 }
