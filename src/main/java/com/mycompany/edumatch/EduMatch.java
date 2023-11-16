@@ -3,11 +3,29 @@ package com.mycompany.edumatch;
 import java.sql.*;
 import java.util.List;
 
-
-
 public class EduMatch {
-    
     public static void main(String[] args) {
+        CommandInvoker database = new CommandInvoker();
+        CommandManager manager = new CommandManager();
+
+        // Crear comandos
+        ICommand showCommand = new CommandShowStudents(database);
+        ICommand addCommand = new CommandAddStudent(database, "John Doe");
+
+        // Configurar el invocador con el comando y ejecutar
+        manager.setCommand(showCommand);
+        manager.executeCommand();
+
+        // Configurar el invocador con otro comando y ejecutar
+        manager.setCommand(addCommand);
+        manager.executeCommand();
+
+        // Volver a mostrar la lista de estudiantes
+        manager.setCommand(showCommand);
+        manager.executeCommand();
+
+
+        /*
         DBFactory dbFactory;
         IOperacionesCrudDB<Persona> iOperacionesBDPersona;
         try{
@@ -15,7 +33,7 @@ public class EduMatch {
             OperacionesBDPersonaSQL operacioensBDPersonaSQL = new OperacionesBDPersonaSQL( dbFactory.getDefaultDBAdapter().obtenerConexion());    
             
             // Supongamos que tienes un objeto operacionesBDPersonaSQL para interactuar con la base de datos
-
+*/
            /* 
             // Crear 5 instancias de Persona con datos inventados
             Persona persona1 = new Persona("12345", "10002154", "Juan", "González", "juan@example.com", null);
@@ -33,6 +51,7 @@ public class EduMatch {
             operacioensBDPersonaSQL.crear(persona5);
             */
             
+            /*
             List<Persona> personas = operacioensBDPersonaSQL.listar();
             for (Persona persona: personas){
                 System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
@@ -49,7 +68,7 @@ public class EduMatch {
             for (Persona persona: iOperacionesBDPersona.listar()){
                 System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
             }
-            
+            */
             /*
             Persona persona1 = new Persona("12345", "10002154", "Juan", "González", "juan@example.com", null);
             Persona persona2 = new Persona("54321", "10002154","María", "Pérez", "maria@example.com", null);
@@ -57,6 +76,7 @@ public class EduMatch {
             iOperacionesBDPersona.crear(persona1);
             iOperacionesBDPersona.crear(persona2);
             */
+           /*
             for (Persona persona: iOperacionesBDPersona.listar()){
                 System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
             }
@@ -64,10 +84,20 @@ public class EduMatch {
             
             OperacionesBDPersonaMySQL oPersonaMySQL = new OperacionesBDPersonaMySQL(dbFactory.getDBadapter(DBType.MySQL).obtenerConexion());
             System.out.println(oPersonaMySQL.obtenerFechaYHora());
+            */
+            //BUILDER
+            // Grupo grupo = new Grupo("Grupo1");
+            // Actividad actividad = new Actividad.Builder()
+            //     .withHoraInicio(9)
+            //     .withHoraFinalizacion(11)
+            //     .withNumeroDia(1)
+            //     .withGrupo(grupo)
+            //     .build();
+        /*
         } catch (Exception e){
             e.printStackTrace();
         }
-
+*/
         /*
          // Crear una instancia de iManejoPersonaSQL
         IManejoBDPersona manejadorPersona = (IManejoBDPersona) new ManejoPersonaSQL();
@@ -116,4 +146,5 @@ public class EduMatch {
         persona3.mostrarPersona();
         */
     }
+    
 }

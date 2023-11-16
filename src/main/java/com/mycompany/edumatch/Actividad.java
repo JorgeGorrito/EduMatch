@@ -2,33 +2,50 @@ package com.mycompany.edumatch;
 
 public class Actividad {
     private int horaInicio;
-	private int horaFinalizacion;
-	private int numeroDia;
-	private Grupo grupo;
+    private int horaFinalizacion;
+    private int numeroDia;
 
-
-    public Actividad(int horaInicio, int horaFinalizacion, int numeroDia, Grupo grupo) {
-		this.asignarActividad(horaInicio, horaFinalizacion, numeroDia, grupo);
+    private Actividad(Builder builder) {
+        this.horaInicio = builder.horaInicio;
+        this.horaFinalizacion = builder.horaFinalizacion;
+        this.numeroDia = builder.numeroDia;
     }
 
-	public void asignarActividad(int horaInicio, int horaFinalizacion, int numeroDia, Grupo grupo){
-		this.horaFinalizacion = horaFinalizacion;
-		this.horaInicio = horaInicio;
-		this.numeroDia = numeroDia;
-		this.grupo = grupo;
-	}
+    public int obtenerHoraInicio() {
+        return this.horaInicio;
+    }
 
-	public int obtenerHoraInicio(){
-		return this.horaInicio;
-	}
+    public int obtenerHoraFinalizacion() {
+        return this.horaFinalizacion;
+    }
 
-	public int obtenerHoraFinalizacion(){
-		return this.horaFinalizacion;
-	}
+    
+    public static class Builder {
+        private int horaInicio;
+        private int horaFinalizacion;
+        private int numeroDia;
 
-	public Grupo obtenerGrupo(){
-		return this.grupo;
-	}
+        public Builder() {
+            
+        }
 
-    // Métodos relacionados con la actividad
+        public Builder withHoraInicio(int horaInicio) {
+            this.horaInicio = horaInicio;
+            return this;
+        }
+
+        public Builder withHoraFinalizacion(int horaFinalizacion) {
+            this.horaFinalizacion = horaFinalizacion;
+            return this;
+        }
+
+        public Builder withNumeroDia(int numeroDia) {
+            this.numeroDia = numeroDia;
+            return this;
+        }
+
+        public Actividad build() {
+            return new Actividad(this);
+        }
+    }
 }
