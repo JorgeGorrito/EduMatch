@@ -7,12 +7,73 @@ import java.util.List;
 
 public class EduMatch {
     
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
+        DBFactory dbFactory;
+        IOperacionesCrudDB<Persona> iOperacionesBDPersona;
+        try{
+            dbFactory = DBFactory.getInstance();
+            OperacionesBDPersonaSQL operacioensBDPersonaSQL = new OperacionesBDPersonaSQL( dbFactory.getDefaultDBAdapter().obtenerConexion());    
+            
+            // Supongamos que tienes un objeto operacionesBDPersonaSQL para interactuar con la base de datos
+
+           /* 
+            // Crear 5 instancias de Persona con datos inventados
+            Persona persona1 = new Persona("12345", "10002154", "Juan", "González", "juan@example.com", null);
+            Persona persona2 = new Persona("54321", "10002154","María", "Pérez", "maria@example.com", null);
+            Persona persona3 = new Persona("98765", "10002154","Carlos", "López", "carlos@example.com", null);
+            Persona persona4 = new Persona("45678", "10002154","Ana", "Martínez", "ana@example.com", null);
+            Persona persona5 = new Persona("78901", "10002154","Pedro", "Sánchez", "pedro@example.com", null);
+            
+            
+            // Insertar las personas en la base de datos
+            operacioensBDPersonaSQL.crear(persona1);
+            operacioensBDPersonaSQL.crear(persona2);
+            operacioensBDPersonaSQL.crear(persona3);
+            operacioensBDPersonaSQL.crear(persona4);
+            operacioensBDPersonaSQL.crear(persona5);
+            */
+            
+            List<Persona> personas = operacioensBDPersonaSQL.listar();
+            for (Persona persona: personas){
+                System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
+            }
+            System.out.println();
+            
+            iOperacionesBDPersona = operacioensBDPersonaSQL;
+            for (Persona persona: iOperacionesBDPersona.listar()){
+                System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
+            }
+            System.out.println();
+            
+            iOperacionesBDPersona = new OperacionesBDPersonaSQL( dbFactory.getDBadapter(DBType.MySQL).obtenerConexion());  
+            for (Persona persona: iOperacionesBDPersona.listar()){
+                System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
+            }
+            
+            /*
+            Persona persona1 = new Persona("12345", "10002154", "Juan", "González", "juan@example.com", null);
+            Persona persona2 = new Persona("54321", "10002154","María", "Pérez", "maria@example.com", null);
+            
+            iOperacionesBDPersona.crear(persona1);
+            iOperacionesBDPersona.crear(persona2);
+            */
+            for (Persona persona: iOperacionesBDPersona.listar()){
+                System.out.println(persona.getNombres() + ", "+ persona.getApellidos() +", " + persona.getCodigo());
+            }
+            System.out.println();
+            
+            OperacionesBDPersonaMySQL oPersonaMySQL = new OperacionesBDPersonaMySQL(dbFactory.getDBadapter(DBType.MySQL).obtenerConexion());
+            System.out.println(oPersonaMySQL.obtenerFechaYHora());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /*
          // Crear una instancia de iManejoPersonaSQL
-        IManejoBDPersona manejadorPersona;// = (IManejoBDPersona) new ManejoPersonaSQL();
+        IManejoBDPersona manejadorPersona = (IManejoBDPersona) new ManejoPersonaSQL();
         IManejoBDPersonaGuardar manejadorPersonaGuardar;
         IManejoBDPersonaCargar manejadorPersonaCargar;
-        manejadorPersona = new ManejoPersonaCSV();
+        //manejadorPersona = new ManejoPersonaCSV();
         manejadorPersonaGuardar = manejadorPersona;
         manejadorPersonaCargar = manejadorPersona;
         
@@ -53,5 +114,6 @@ public class EduMatch {
         EstudianteDTO estudiante1 = new EstudianteDTO("123456", "Juan", "Pérez", "juan@example.com");
         Persona persona3 = new Persona(estudiante1);
         persona3.mostrarPersona();
+        */
     }
 }
