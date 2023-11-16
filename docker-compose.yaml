@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin 
+      POSTGRES_DB: software2lab 
+    ports:
+      - 5432:5432 
+    volumes:
+      - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
+    
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: software2lab
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql.sql:/docker-entrypoint-initdb.d/sql.sql
